@@ -18,4 +18,3 @@ steps:
 - script: serverless deploy -v --force
   workingDirectory:  $(Build.SourcesDirectory)
   displayName: 'Deploy to AWS Dev'
-  env:  # mapping of environment variables to add
