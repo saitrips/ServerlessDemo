@@ -42,7 +42,7 @@ functions:
 
     # you can add packaging information here
     package:
-      artifact: bin/nodejs_local_function.zip
+      artifact: output/nodejs_local_function.zip
 
   lambda_handler:
     runtime: python3.6
@@ -50,7 +50,7 @@ functions:
 
     # you can add packaging information here
     package:
-      artifact: bin/python_s3_function.zip
+      artifact: output/python_s3_function.zip
 
     events:
       - s3:
@@ -63,7 +63,7 @@ functions:
 
     # you can add packaging information here
     package:
-      artifact: bin/python_layer_function.zip
+      artifact: output/python_layer_function.zip
 
     events:
       - http:
@@ -78,7 +78,7 @@ functions:
 
     # you can add packaging information here
     package:
-      artifact: bin/csharp_function.zip
+      artifact: output/csharp_function.zip
     #  exclude:
     #    - exclude-me.js
     #    - exclude-me-dir/**
