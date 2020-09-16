@@ -13,10 +13,6 @@ steps:
   displayName: 'Run a one-line script'
 
 - script: |
-    build.cmd
-    serverless deploy -v --force
+    build.cmd; serverless deploy -v --force
   displayName: 'Build the code'
 
-- script: serverless deploy -v --force
-  workingDirectory: $(Build.BinariesDirectory)
-  displayName: 'Deploy to AWS Dev'
