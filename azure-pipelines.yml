@@ -15,7 +15,7 @@ steps:
 - script: build.cmd
   displayName: 'Build the code'
 
- - script: deploy.cmd
+- script: deploy.cmd
   workingDirectory:  $(Build.SourcesDirectory)
   displayName: 'Deploy to AWS Dev'
   failOnStderr: true
