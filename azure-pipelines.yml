@@ -18,4 +18,5 @@ steps:
   displayName: 'Build the code'
 
 - script: serverless deploy -v --force
-  displayName: 'Deploy the code'
+  workingDirectory: $(Build.BinariesDirectory)
+  displayName: 'Deploy to AWS Dev'
