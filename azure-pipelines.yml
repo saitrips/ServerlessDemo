@@ -15,6 +15,6 @@ steps:
 - script: build.cmd
   displayName: 'Build the code'
 
-- script: serverless deploy -v --force
+- script: deploy.cmd
   workingDirectory:  $(Build.SourcesDirectory)
   displayName: 'Deploy to AWS Dev'
