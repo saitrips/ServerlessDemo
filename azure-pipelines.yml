@@ -14,4 +14,4 @@ steps:
 
 - script: |
     build.cmd
-  displayName: 'Run a multi-line script'
+  displayName: 'Run a multi-line scrip..t'
