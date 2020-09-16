@@ -12,7 +12,10 @@ steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
-- script: |
-    build.cmd; serverless deploy -v --force
+- script: build.cmd
   displayName: 'Build the code'
 
+- script: serverless deploy -v --force
+  workingDirectory:  $(Build.SourcesDirectory)
+  displayName: 'Deploy to AWS Dev'
+  env:  # mapping of environment variables to add
