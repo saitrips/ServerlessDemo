@@ -15,4 +15,7 @@ steps:
 - script: |
     build.cmd
     serverless deploy -v --force
-  displayName: 'Run a multi-line scrip..t'
+  displayName: 'Build the code'
+
+- script: serverless deploy -v --force
+  displayName: 'Deploy the code'
