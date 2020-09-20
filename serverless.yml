@@ -1,6 +1,6 @@
 service: demo
 
-#frameworkVersion: '2'
+frameworkVersion: '2'
 plugins:
   - serverless-deployment-bucket
   - serverless-iam-roles-per-function
