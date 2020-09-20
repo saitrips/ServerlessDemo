@@ -1,0 +1,9 @@
+{
+  "version": "1.0.0",
+  "name": "asp.net",
+  "private": true,
+  "devDependencies": {
+    "serverless-deployment-bucket": "^1.1.2",
+    "serverless-iam-roles-per-function": "^2.0.2"
+  }
+}
