@@ -15,7 +15,7 @@ namespace AwsDotnetCsharp
             var response = new APIGatewayProxyResponse
             {
                 StatusCode = (int)HttpStatusCode.OK,
-                Body = "{ \"Message\": \"Hello World\" }",
+                Body = "{ \"Message\": \"Hello this is c# lambda function!!!!\" }",
                 Headers = new Dictionary<string, string> { { "Content-Type", "application/json" } }
             };
 

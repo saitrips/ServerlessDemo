@@ -1,31 +1,25 @@
 service: demo
 
 frameworkVersion: '2'
-
+plugins:
+  - serverless-deployment-bucket
+  - serverless-iam-roles-per-function
 provider:
   name: aws
- 
   profile: serverless
-  stage: dev
+  region: us-east-1
+  stage: ${opt:stage, 'dev'}
+  deploymentBucket:
+    name: ${opt:stage}.sai.serverless
+    serverSideEncryption: AES256
 # you can overwrite defaults here
 #  stage: dev
-#  region: us-east-1
 
-# you can add statements to the Lambda function's IAM Role here
-  iamRoleStatements:
-    
-    - Effect: "Allow"
-      Action:
-        - "s3:PutObject"
-        - "s3:ListBucket"
-        - "s3:GetObject"
-        - "s3:PutObject"
-        - "s3:PutObjectAcl"
-      Resource: 
-        - 'arn:aws:s3:::destination-test-bucket-007/*'
-        - 'arn:aws:s3:::source-test-bucket-007/*'
-        
+custom:
+  deploymentBucket:
+    versioning: true
 
+# you can add statements to the Lambda function's IAM Role here...
 # you can define service wide environment variables here
 #  environment:
 #    variable1: value1
@@ -35,10 +29,22 @@ package:
 
 
 functions:
-  
+
+  helloTest:
+    runtime: nodejs12.x
+    handler:  lambda-functions/integration-test.helloTest
+
+    # you can add packaging information here
+    package:
+      artifact: output/nodejs_integrationtest_function.zip
+
+    events:
+      - http:
+          path: hello
+          method: post
   localtest:
     runtime: nodejs12.x
-    handler: local-invoke-test.localtest
+    handler:  lambda-functions/local-invoke-test.localtest
 
     # you can add packaging information here
     package:
@@ -46,11 +52,24 @@ functions:
 
   lambda_handler:
     runtime: python3.6
-    handler: s3copy.lambda_handler
+    handler: lambda-functions/s3copy.lambda_handler
+    iamRoleStatementsName: s3permissionstolambda
+    iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "s3:ListBucket"
+        - "s3:GetObject"
+        - "s3:PutObject"
+        - "s3:PutObjectAcl"
+        - "s3:GetObjectTagging"
+        - "s3:PutObjectTagging"
+      Resource: 
+        - 'arn:aws:s3:::destination-test-bucket-007/*'
+        - 'arn:aws:s3:::source-test-bucket-007/*'
 
     # you can add packaging information here
     package:
-      artifact: output/python_s3_function.zip
+     artifact: output/python_s3_function.zip
 
     events:
       - s3:
@@ -59,7 +78,7 @@ functions:
 
   lambda_layer_handler:
     runtime: python3.7
-    handler: LayerTest.lambda_layer_handler
+    handler:  lambda-functions/LayerTest.lambda_layer_handler
 
     # you can add packaging information here
     package:
@@ -78,7 +97,7 @@ functions:
 
     # you can add packaging information here
     package:
-      artifact: output/csharp_function.zip
+     artifact: output/csharp_function.zip
     #  exclude:
     #    - exclude-me.js
     #    - exclude-me-dir/**
@@ -87,7 +106,7 @@ functions:
 #    Check the event documentation for details
     events:
       - http:
-          path: users/create
+          path: test/hello
           method: get
       - schedule: rate(21 minutes)
       - schedule: cron(0 12 * * ? *)
@@ -127,3 +146,6 @@ layers:
   testlayer:
     path: lambda-layers
 # you can add CloudFormation resource templates here
+resources:
+   # S3
+  - ${file(resources/s3-bucket.yml)}

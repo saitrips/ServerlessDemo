@@ -1,0 +1,11 @@
+- name: integrationtest
+  endpoint: {function: helloTest}
+  response:
+    body: "Hello, world"
+- name: says hello to alice
+  endpoint: {function: helloTest}
+  request:
+    body:
+      name: alice
+  response:
+    body: "Hello, alice"

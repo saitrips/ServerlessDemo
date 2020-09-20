@@ -13,6 +13,5 @@ def lambda_layer_handler(event, context):
     return {
      'statusCode': 200,
      'body': response,
-     'isBase64Encoded': False,
      'headers': {}  
     }
