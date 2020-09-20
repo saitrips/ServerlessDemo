@@ -16,7 +16,7 @@ steps:
   displayName: 'Build the code'
 
 - script: |
-  npm install
-  C:\Users\staff\AppData\Roaming\npm\serverless deploy -v --stage qa --aws-profile serverless --force 
+   npm install
+   C:\Users\staff\AppData\Roaming\npm\serverless deploy -v --stage qa --aws-profile serverless --force 
   displayName: 'Deploy to AWS Dev'
   failOnStderr: true
