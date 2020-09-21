@@ -1,0 +1,16 @@
+﻿1) serverless deploy -v --stage qa --aws-profile serverless --force 
+
+2) serverless test  --stage qa --name integrationtest   (pending)
+
+3) serverless invoke local --stage qa --function localtest
+
+4)serverless deploy -v --stage dv --aws-profile serverless --force 
+
+serverless pipeline: https://dev.azure.com/saie0925/ServerlessDemo/_build
+
+curl -XPOST https://ej20pmtfq9.execute-api.us-east-1.amazonaws.com/dv/startEC2 -d '{"instanceId":"i-0237c830cf2e51440"}'
+
+git remote add origin githuburl
+
+git push --force origin master
+
